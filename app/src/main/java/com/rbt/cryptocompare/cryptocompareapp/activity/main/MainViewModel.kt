@@ -15,7 +15,8 @@ class MainViewModel : ViewModel(), IMainViewModel {
 
     override fun getMainData() {
         val dbModel = db?.coinDao()?.getAll()
-        val mainModelList = dbModel?.map { MainDataModel.CoinItem(it.Name, it.Symbol, it.ImageUrl) }?.toTypedArray() ?: emptyArray()
+        val mainModelList = dbModel?.map { MainDataModel.CoinItem.getInstanceFromDbModel(it) }?.toTypedArray()
+                ?: emptyArray()
 
         mainModel.postValue(MainDataModel(mainModelList))
     }

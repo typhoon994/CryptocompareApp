@@ -2,14 +2,14 @@ package com.rbt.cryptocompare.cryptocompareapp.activity.splash
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.persistence.room.Room
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainActivity
 import com.rbt.cryptocompare.cryptocompareapp.R
-import android.arch.persistence.room.Room
+import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 
 
@@ -35,7 +35,9 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         val db = Room.databaseBuilder(applicationContext,
-                CoinDatabase::class.java, "coin-db").build()
+                CoinDatabase::class.java, "coin-db")
+                .fallbackToDestructiveMigration()
+                .build()
 
         viewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
         viewModel.setDBInstance(db)

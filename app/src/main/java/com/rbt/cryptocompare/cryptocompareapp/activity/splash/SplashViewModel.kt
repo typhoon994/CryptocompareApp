@@ -3,13 +3,13 @@ package com.rbt.cryptocompare.cryptocompareapp.activity.splash
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.CoinsResponse
+import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
+import com.rbt.cryptocompare.cryptocompareapp.db.CoinDbModel
 import com.rbt.cryptocompare.cryptocompareapp.networking.NetworkingHelper
+import com.rbt.cryptocompare.cryptocompareapp.networking.model.CoinsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDbModel
 
 
 class SplashViewModel : ViewModel(), ISplashViewModel {
@@ -32,8 +32,7 @@ class SplashViewModel : ViewModel(), ISplashViewModel {
                     val coinsList = (it.body() as CoinsResponse).Data.values
                     val baseUrl = response.body()?.BaseImageUrl
                     val dbList = coinsList.map {
-                        val id = it.Id.toLong()
-                        CoinDbModel(id, it.CoinName, it.Symbol, baseUrl + it.ImageUrl)
+                        CoinDbModel.instanceFromNetworkingModel(it, baseUrl!!)
                     }.toTypedArray()
 
                     Thread(Runnable {

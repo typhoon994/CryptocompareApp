@@ -3,17 +3,18 @@ package com.rbt.cryptocompare.cryptocompareapp.activity.main
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.arch.persistence.room.Room
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.rbt.cryptocompare.cryptocompareapp.R
+import com.rbt.cryptocompare.cryptocompareapp.activity.details.DetailsActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val observer: Observer<MainDataModel>
         get() = Observer { model ->
-            viewAdapter = MainAdapter(model!!.list)
+            viewAdapter = MainAdapter(model!!.list, this)
             recyclerView.adapter = viewAdapter
 
             loader.visibility = View.GONE
@@ -42,7 +43,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val db = Room.databaseBuilder(applicationContext,
-                CoinDatabase::class.java, "coin-db").build()
+                CoinDatabase::class.java, "coin-db")
+                .fallbackToDestructiveMigration()
+                .build()
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.setDbInstance(db)
@@ -50,5 +53,10 @@ class MainActivity : AppCompatActivity() {
 
         loader.visibility = View.VISIBLE
         Thread(Runnable { viewModel.getMainData() }).start()
+    }
+
+    override fun onCoinSelected(coin: MainDataModel.CoinItem) {
+        val intent = DetailsActivity.newIntent(this, coin)
+        startActivity(intent)
     }
 }

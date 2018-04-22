@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CryptocompareApp</string>
+
+    <string name="algorithm_format">Algorithm: %s</string>
+    <string name="proof_type_format">Proof type: %s</string>
+    <string name="total_coin_supply_format">Total Coin Supply: %s</string>
+    <string name="pre_mined_format">Pre Mined Value: %s</string>
+    <string name="total_coins_free_float_format">Total Coins Free Float: %s</string>
+    <string name="trading_format">Is trading: %s</string>
 </resources>

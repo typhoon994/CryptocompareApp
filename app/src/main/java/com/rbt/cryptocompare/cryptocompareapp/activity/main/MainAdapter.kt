@@ -1,10 +1,11 @@
-package com.rbt.cryptocompare.cryptocompareapp.main
+package com.rbt.cryptocompare.cryptocompareapp.activity.main
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rbt.cryptocompare.cryptocompareapp.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_main.view.*
 
 class MainAdapter(private val mainData: Array<MainDataModel.CoinItem>) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
@@ -14,6 +15,7 @@ class MainAdapter(private val mainData: Array<MainDataModel.CoinItem>) : Recycle
         fun render(model: MainDataModel.CoinItem) {
             itemView.name.text = model.Name
             itemView.symbol.text = model.Symbol
+            Picasso.get().load(model.ImageUrl).into(itemView.icon)
         }
     }
 

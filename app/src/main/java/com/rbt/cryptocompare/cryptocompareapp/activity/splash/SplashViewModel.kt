@@ -1,27 +1,46 @@
-package com.rbt.cryptocompare.cryptocompareapp.splash
+package com.rbt.cryptocompare.cryptocompareapp.activity.splash
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.rbt.cryptocompare.cryptocompareapp.model.CoinsResponse
+import com.rbt.cryptocompare.cryptocompareapp.networking.model.CoinsResponse
 import com.rbt.cryptocompare.cryptocompareapp.networking.NetworkingHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
+import com.rbt.cryptocompare.cryptocompareapp.db.CoinDbModel
+
 
 class SplashViewModel : ViewModel(), ISplashViewModel {
 
+    private var db: CoinDatabase? = null
     private val errorData = MutableLiveData<String?>()
     private val networkingHelper = NetworkingHelper.getInstance()
+
+    override fun setDBInstance(db: CoinDatabase) {
+        this.db = db
+    }
 
     override fun cacheMainData(): LiveData<String?> {
 
         networkingHelper.getCoinList().enqueue(object : Callback<CoinsResponse> {
             override fun onResponse(call: Call<CoinsResponse>?, response: Response<CoinsResponse>?) {
                 response?.let {
-                    if (!it.isSuccessful) return@let
+                    if (!it.isSuccessful || it.body() == null) return@let
 
-                    errorData.postValue(null)
+                    val coinsList = (it.body() as CoinsResponse).Data.values
+                    val baseUrl = response.body()?.BaseImageUrl
+                    val dbList = coinsList.map {
+                        val id = it.Id.toLong()
+                        CoinDbModel(id, it.CoinName, it.Symbol, baseUrl + it.ImageUrl)
+                    }.toTypedArray()
+
+                    Thread(Runnable {
+                        db?.coinDao()?.insertAll(dbList)
+                        errorData.postValue(null)
+                    }).start()
+
                     return
                 }
 

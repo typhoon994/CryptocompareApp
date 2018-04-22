@@ -1,13 +1,15 @@
-package com.rbt.cryptocompare.cryptocompareapp.main
+package com.rbt.cryptocompare.cryptocompareapp.activity.main
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.persistence.room.Room
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.rbt.cryptocompare.cryptocompareapp.R
+import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -39,7 +41,11 @@ class MainActivity : AppCompatActivity() {
             visibility = View.GONE
         }
 
+        val db = Room.databaseBuilder(applicationContext,
+                CoinDatabase::class.java, "coin-db").build()
+
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.setDbInstance(db)
         viewModel.getMainDataObservable().observe(this, observer)
 
         loader.visibility = View.VISIBLE

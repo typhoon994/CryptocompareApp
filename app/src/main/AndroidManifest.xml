@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".main.MainActivity"/>
+        <activity android:name="com.rbt.cryptocompare.cryptocompareapp.activity.main.MainActivity"/>
 
-        <activity android:name=".splash.SplashActivity">
+        <activity android:name="com.rbt.cryptocompare.cryptocompareapp.activity.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

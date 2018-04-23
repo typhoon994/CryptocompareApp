@@ -9,4 +9,16 @@
     <string name="trading_format">Is trading: %s</string>
 
     <string name="coin_format">1 %s = </string>
+
+    <string-array name="history_rate">
+        <item>Day</item>
+        <item>Hour</item>
+        <item>Minute</item>
+    </string-array>
+
+    <string-array name="day_rate_interval">
+        <item>Day</item>
+        <item>Three Days</item>
+        <item>Week</item>
+    </string-array>
 </resources>

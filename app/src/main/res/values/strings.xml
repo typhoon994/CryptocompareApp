@@ -7,4 +7,6 @@
     <string name="pre_mined_format">Pre Mined Value: %s</string>
     <string name="total_coins_free_float_format">Total Coins Free Float: %s</string>
     <string name="trading_format">Is trading: %s</string>
+
+    <string name="coin_format">1 %s = </string>
 </resources>

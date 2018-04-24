@@ -18,7 +18,20 @@
 
     <string-array name="day_rate_interval">
         <item>Day</item>
+        <item>Week</item>
+        <item>Two Weeks</item>
+        <item>Month</item>
+    </string-array>
+
+    <string-array name="hour_rate_interval">
+        <item>Day</item>
         <item>Three Days</item>
         <item>Week</item>
+    </string-array>
+
+    <string-array name="minute_rate_interval">
+        <item>Hour</item>
+        <item>Three Hours</item>
+        <item>Day</item>
     </string-array>
 </resources>

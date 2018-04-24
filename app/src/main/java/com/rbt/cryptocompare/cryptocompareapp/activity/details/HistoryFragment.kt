@@ -9,14 +9,11 @@ import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainDataModel
 import android.arch.lifecycle.ViewModelProviders
 import android.arch.persistence.room.Room
-import android.content.Intent
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.model.HistoryModel
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.DetailsViewModel
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.IHistoryViewModel
-import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 import kotlinx.android.synthetic.main.fragment_history.*
 
@@ -55,12 +52,12 @@ class HistoryFragment : DetailsFragment() {
 
                 "Hour" -> {
                     adapter = ArrayAdapter.createFromResource(context,
-                            R.array.day_rate_interval, android.R.layout.simple_spinner_item)
+                            R.array.hour_rate_interval, android.R.layout.simple_spinner_item)
                 }
 
                 else -> {
                     adapter = ArrayAdapter.createFromResource(context,
-                            R.array.history_rate, android.R.layout.simple_spinner_item)
+                            R.array.minute_rate_interval, android.R.layout.simple_spinner_item)
                 }
             }
 

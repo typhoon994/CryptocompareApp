@@ -2,7 +2,11 @@ package com.rbt.cryptocompare.cryptocompareapp.activity.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel(), IMainViewModel {
 
@@ -14,10 +18,12 @@ class MainViewModel : ViewModel(), IMainViewModel {
     override fun setDbInstance(db: CoinDatabase) { this.db = db }
 
     override fun getMainData() {
-        val dbModel = db?.coinDao()?.getAll()
-        val mainModelList = dbModel?.map { MainDataModel.CoinItem.getInstanceFromDbModel(it) }?.toTypedArray()
+        viewModelScope.launch(Dispatchers.IO) {
+            val dbModel = db?.coinDao()?.getAll()
+            val mainModelList = dbModel?.map { MainDataModel.CoinItem.getInstanceFromDbModel(it) }?.toTypedArray()
                 ?: emptyArray()
 
-        mainModel.postValue(MainDataModel(mainModelList))
+            withContext(Dispatchers.Main) { mainModel.postValue(MainDataModel(mainModelList)) }
+        }
     }
 }

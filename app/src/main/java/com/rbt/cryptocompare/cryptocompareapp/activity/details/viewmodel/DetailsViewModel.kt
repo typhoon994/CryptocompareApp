@@ -3,6 +3,7 @@ package com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.model.CoinComparison
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.model.HistoryModel
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
@@ -10,6 +11,9 @@ import com.rbt.cryptocompare.cryptocompareapp.db.ComparisonDbModel
 import com.rbt.cryptocompare.cryptocompareapp.networking.NetworkingHelper
 import com.rbt.cryptocompare.cryptocompareapp.networking.model.ComparisonResponse
 import com.rbt.cryptocompare.cryptocompareapp.networking.model.HistoryResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,7 +45,7 @@ class DetailsViewModel : ViewModel(), IMoreDetailsViewModel, IHistoryViewModel {
             call: Call<HistoryResponse>?,
             response: Response<HistoryResponse>?
         ) {
-            if (response == null || response.body() == null) return
+            response?.body() ?: return
 
             historyData.postValue(
                 HistoryModel.getInstanceFromNetworkModel(
@@ -58,22 +62,22 @@ class DetailsViewModel : ViewModel(), IMoreDetailsViewModel, IHistoryViewModel {
 
     private fun onDataFetched(symbol: String, response: ComparisonResponse?) {
         response?.let {
-            Thread(Runnable {
+            viewModelScope.launch(Dispatchers.IO) {
                 val dbModel = ComparisonDbModel.getInstanceFromComparisonResponse(symbol, it)
                 db?.coinDao()?.insertComparison(dbModel)
-            }).start()
+            }
 
             comparisonData.postValue(CoinComparison.getInstanceFromNetworkModel(it))
             return
         }
 
-        Thread({
+        viewModelScope.launch(Dispatchers.IO) {
             val model = db?.coinDao()?.getComparison(symbol)
             val comparison =
                 if (model != null) CoinComparison.getInstanceFromDBModel(model) else null
 
-            comparisonData.postValue(comparison)
-        }).start()
+            withContext(Dispatchers.IO) { comparisonData.postValue(comparison) }
+        }
     }
 
     override fun getComparisonResults(symbol: String): LiveData<CoinComparison?> {

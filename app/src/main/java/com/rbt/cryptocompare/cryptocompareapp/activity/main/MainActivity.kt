@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
         viewModel.getMainDataObservable().observe(this, observer)
 
         loader!!.visibility = View.VISIBLE
-        Thread(Runnable { viewModel.getMainData() }).start()
+        viewModel.getMainData()
     }
 
     override fun onCoinSelected(coin: MainDataModel.CoinItem) {

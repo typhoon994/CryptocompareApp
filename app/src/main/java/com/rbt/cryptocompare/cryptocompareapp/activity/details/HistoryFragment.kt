@@ -81,7 +81,7 @@ class HistoryFragment : DetailsFragment() {
             viewModel.getComparisonResults(
                 coinItem.Symbol,
                 intervalSpinner!!.selectedItem as String,
-                intervalSpinner!!.selectedItem as String
+                rateSpinner!!.selectedItem as String
             ).observe(this@HistoryFragment, observer)
         }
     }

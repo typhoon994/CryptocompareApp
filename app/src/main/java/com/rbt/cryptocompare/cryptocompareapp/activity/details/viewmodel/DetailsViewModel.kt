@@ -21,29 +21,40 @@ class DetailsViewModel : ViewModel(), IMoreDetailsViewModel, IHistoryViewModel {
     private var db: CoinDatabase? = null
     private var compareSymbol: String = ""
 
-    private val INTERVAL_VALUES: HashMap<String, Int> = hashMapOf("Minute" to 1,
-            "Hour" to 60,
-            "Three Hours" to 3*60,
-            "Day" to 24*60,
-            "Three Days" to 3*24*60,
-            "Week" to 7*24*60,
-            "Two Weeks" to 2*7*24*60,
-            "Month" to 30*24*60)
+    private val INTERVAL_VALUES: HashMap<String, Int> = hashMapOf(
+        "Minute" to 1,
+        "Hour" to 60,
+        "Three Hours" to 3 * 60,
+        "Day" to 24 * 60,
+        "Three Days" to 3 * 24 * 60,
+        "Week" to 7 * 24 * 60,
+        "Two Weeks" to 2 * 7 * 24 * 60,
+        "Month" to 30 * 24 * 60
+    )
 
     private val callback = object : Callback<HistoryResponse> {
         override fun onFailure(call: Call<HistoryResponse>?, t: Throwable?) {
 
         }
 
-        override fun onResponse(call: Call<HistoryResponse>?, response: Response<HistoryResponse>?) {
+        override fun onResponse(
+            call: Call<HistoryResponse>?,
+            response: Response<HistoryResponse>?
+        ) {
             if (response == null || response.body() == null) return
 
-            historyData.postValue(HistoryModel.getInstanceFromNetworkModel(response.body() as HistoryResponse,
-                    compareSymbol))
+            historyData.postValue(
+                HistoryModel.getInstanceFromNetworkModel(
+                    response.body() as HistoryResponse,
+                    compareSymbol
+                )
+            )
         }
     }
 
-    override fun setDBInstance(db: CoinDatabase) { this.db = db }
+    override fun setDBInstance(db: CoinDatabase) {
+        this.db = db
+    }
 
     private fun onDataFetched(symbol: String, response: ComparisonResponse?) {
         response?.let {
@@ -56,9 +67,10 @@ class DetailsViewModel : ViewModel(), IMoreDetailsViewModel, IHistoryViewModel {
             return
         }
 
-        Thread(Runnable {
+        Thread({
             val model = db?.coinDao()?.getComparison(symbol)
-            val comparison = if(model != null) CoinComparison.getInstanceFromDBModel(model) else null
+            val comparison =
+                if (model != null) CoinComparison.getInstanceFromDBModel(model) else null
 
             comparisonData.postValue(comparison)
         }).start()
@@ -67,12 +79,15 @@ class DetailsViewModel : ViewModel(), IMoreDetailsViewModel, IHistoryViewModel {
     override fun getComparisonResults(symbol: String): LiveData<CoinComparison?> {
 
         val networkingInstance = NetworkingHelper.getInstance()
-        networkingInstance.getComparison(symbol).enqueue(object: Callback<ComparisonResponse> {
+        networkingInstance.getComparison(symbol).enqueue(object : Callback<ComparisonResponse> {
             override fun onFailure(call: Call<ComparisonResponse>?, t: Throwable?) {
                 onDataFetched(symbol, null)
             }
 
-            override fun onResponse(call: Call<ComparisonResponse>?, response: Response<ComparisonResponse>?) {
+            override fun onResponse(
+                call: Call<ComparisonResponse>?,
+                response: Response<ComparisonResponse>?
+            ) {
                 onDataFetched(symbol, response?.body())
             }
         })
@@ -80,17 +95,24 @@ class DetailsViewModel : ViewModel(), IMoreDetailsViewModel, IHistoryViewModel {
         return comparisonData;
     }
 
-    override fun getComparisonResults(symbol: String, interval: String, rate: String): LiveData<HistoryModel> {
-        val rateValue = INTERVAL_VALUES[rate] ?: 24*60
-        val intervalValue = INTERVAL_VALUES[interval] ?: 24*60
+    override fun getComparisonResults(
+        symbol: String,
+        interval: String,
+        rate: String
+    ): LiveData<HistoryModel> {
+        val rateValue = INTERVAL_VALUES[rate] ?: 24 * 60
+        val intervalValue = INTERVAL_VALUES[interval] ?: 24 * 60
 
         val numberOfItems = rateValue/intervalValue
         compareSymbol = if (symbol == "BTC") "EUR" else "BTC"
 
         when (interval) {
-            "Hour" -> NetworkingHelper.getInstance().getHourHistory(symbol, compareSymbol, numberOfItems).enqueue(callback)
-            "Minute" -> NetworkingHelper.getInstance().getMinuteHistory(symbol, compareSymbol, numberOfItems).enqueue(callback)
-            else -> NetworkingHelper.getInstance().getDayHistory(symbol, compareSymbol, numberOfItems).enqueue(callback)
+            "Hour" -> NetworkingHelper.getInstance()
+                .getHourHistory(symbol, compareSymbol, numberOfItems).enqueue(callback)
+            "Minute" -> NetworkingHelper.getInstance()
+                .getMinuteHistory(symbol, compareSymbol, numberOfItems).enqueue(callback)
+            else -> NetworkingHelper.getInstance()
+                .getDayHistory(symbol, compareSymbol, numberOfItems).enqueue(callback)
         }
 
         return historyData

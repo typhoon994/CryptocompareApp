@@ -17,7 +17,6 @@ class HistoryGraphView : View {
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     init {
         paint.isAntiAlias = true
@@ -35,24 +34,24 @@ class HistoryGraphView : View {
     }
 
     override fun onDraw(canvas: Canvas) {
-        val itemWidth = canvas.width/model.historyItems.size.toFloat()
+        val itemWidth = width/model.historyItems.size.toFloat()
         val maxValue = model.historyItems.maxByOrNull { it.value }?.value ?: 1f
-        val minValue = model.historyItems.maxByOrNull { it.value }?.value ?: 0f
+        val minValue = model.historyItems.minByOrNull { it.value }?.value ?: 0f
 
-        val heightPadding = (canvas.height / 7)
-        val scale = (canvas.height - 2 * heightPadding)/(maxValue - minValue)
+        val heightPadding = (height / 7)
+        val scale = (height - 2 * heightPadding) / (maxValue - minValue)
 
-        var previousHeight = canvas.height.toFloat()/2
-        val maxHeight = canvas.height - heightPadding
+        var previousHeight = height.toFloat()/2
+        val maxHeight = height - heightPadding
         val maxMeasuredHeight = maxHeight - scale * (maxValue - minValue)
 
-        canvas.drawLine(0f, maxHeight.toFloat(), canvas.width.toFloat(), maxHeight.toFloat(), legendPaint)
-        canvas.drawLine(0f, maxMeasuredHeight, canvas.width.toFloat(), maxMeasuredHeight, legendPaint)
+        canvas.drawLine(0f, maxHeight.toFloat(), width.toFloat(), maxHeight.toFloat(), legendPaint)
+        canvas.drawLine(0f, maxMeasuredHeight, width.toFloat(), maxMeasuredHeight, legendPaint)
         canvas.drawText(maxValue.toString() + model.unit, 10f, maxMeasuredHeight - 10, legendPaint)
         canvas.drawText(minValue.toString() + model.unit, 10f, maxHeight.toFloat() + 40, legendPaint)
-        canvas.drawText(model.endTime.toString(), 10f, canvas.height-5f, legendPaint)
+        canvas.drawText(model.endTime.toString(), 10f, height-5f, legendPaint)
         //Quick fix, doesnt center properly, need to measure text width then remove it from canvas width
-        canvas.drawText(model.startTime.toString(), canvas.width/2 + 10f, canvas.height-5f, legendPaint)
+        canvas.drawText(model.startTime.toString(), width/2 + 10f, height-5f, legendPaint)
 
         model.historyItems.forEachIndexed { index, historyItem ->
             val startX = index*itemWidth

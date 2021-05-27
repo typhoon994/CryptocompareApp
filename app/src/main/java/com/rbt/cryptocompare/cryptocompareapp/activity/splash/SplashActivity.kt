@@ -1,12 +1,12 @@
 package com.rbt.cryptocompare.cryptocompareapp.activity.splash
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.arch.persistence.room.Room
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.room.Room
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainActivity

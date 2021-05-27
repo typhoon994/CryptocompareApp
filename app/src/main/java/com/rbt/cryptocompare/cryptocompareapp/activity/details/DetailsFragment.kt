@@ -1,6 +1,6 @@
 package com.rbt.cryptocompare.cryptocompareapp.activity.details
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 
 abstract class DetailsFragment : Fragment() {
 

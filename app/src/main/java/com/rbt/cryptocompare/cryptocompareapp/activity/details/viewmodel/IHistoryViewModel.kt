@@ -1,6 +1,6 @@
 package com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.model.HistoryModel
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 

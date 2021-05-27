@@ -15,7 +15,7 @@ abstract class NetworkingHelper {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
-            return retrofit.create<ICryptoApi>(ICryptoApi::class.java)
+            return retrofit.create(ICryptoApi::class.java)
         }
 
         fun getInstance() = helper

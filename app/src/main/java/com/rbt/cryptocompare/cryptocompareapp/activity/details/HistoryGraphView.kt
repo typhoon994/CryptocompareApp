@@ -36,8 +36,8 @@ class HistoryGraphView : View {
 
     override fun onDraw(canvas: Canvas) {
         val itemWidth = canvas.width/model.historyItems.size.toFloat()
-        val maxValue = model.historyItems.maxBy { it.value }?.value ?: 1f
-        val minValue = model.historyItems.minBy { it.value }?.value ?: 0f
+        val maxValue = model.historyItems.maxByOrNull { it.value }?.value ?: 1f
+        val minValue = model.historyItems.maxByOrNull { it.value }?.value ?: 0f
 
         val heightPadding = (canvas.height / 7)
         val scale = (canvas.height - 2 * heightPadding)/(maxValue - minValue)

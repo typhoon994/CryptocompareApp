@@ -1,17 +1,16 @@
 package com.rbt.cryptocompare.cryptocompareapp.activity.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.arch.persistence.room.Room
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.room.Room
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.DetailsActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
@@ -19,19 +18,22 @@ class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewModel: IMainViewModel
+    private var loader: View? = null
 
     private val observer: Observer<MainDataModel>
         get() = Observer { model ->
             viewAdapter = MainAdapter(model!!.list, this)
             recyclerView.adapter = viewAdapter
 
-            loader.visibility = View.GONE
+            loader!!.visibility = View.GONE
             recyclerView.visibility = View.VISIBLE
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        loader = findViewById(R.id.loader)
 
         val viewManager = LinearLayoutManager(this)
         viewManager.orientation = LinearLayoutManager.VERTICAL
@@ -51,7 +53,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
         viewModel.setDbInstance(db)
         viewModel.getMainDataObservable().observe(this, observer)
 
-        loader.visibility = View.VISIBLE
+        loader!!.visibility = View.VISIBLE
         Thread(Runnable { viewModel.getMainData() }).start()
     }
 

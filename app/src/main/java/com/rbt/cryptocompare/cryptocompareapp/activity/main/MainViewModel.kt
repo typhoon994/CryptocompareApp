@@ -1,7 +1,7 @@
 package com.rbt.cryptocompare.cryptocompareapp.activity.main
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 
 class MainViewModel : ViewModel(), IMainViewModel {

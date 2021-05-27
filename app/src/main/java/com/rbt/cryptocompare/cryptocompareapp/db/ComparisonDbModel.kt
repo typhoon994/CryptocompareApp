@@ -1,7 +1,7 @@
 package com.rbt.cryptocompare.cryptocompareapp.db
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.rbt.cryptocompare.cryptocompareapp.networking.model.ComparisonResponse
 import org.jetbrains.annotations.NotNull
 

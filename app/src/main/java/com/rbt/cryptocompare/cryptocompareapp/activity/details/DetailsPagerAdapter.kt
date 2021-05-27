@@ -1,7 +1,7 @@
 package com.rbt.cryptocompare.cryptocompareapp.activity.details
 
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainDataModel
 
 class DetailsPagerAdapter(fm: FragmentManager, coin: MainDataModel.CoinItem) : FragmentPagerAdapter(fm)  {

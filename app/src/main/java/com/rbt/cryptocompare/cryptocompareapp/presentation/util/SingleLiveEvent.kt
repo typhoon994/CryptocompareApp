@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.util
+package com.rbt.cryptocompare.cryptocompareapp.presentation.util
 
 import android.util.Log
 import androidx.annotation.MainThread

@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.details
+package com.rbt.cryptocompare.cryptocompareapp.presentation.details
 
 import androidx.fragment.app.Fragment
 

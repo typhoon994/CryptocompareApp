@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.details
+package com.rbt.cryptocompare.cryptocompareapp.presentation.details
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,8 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinComparison
-import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.DetailsViewModel
-import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.IMoreDetailsViewModel
+import com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel.DetailsViewModel
+import com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel.IMoreDetailsViewModel
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 import com.squareup.picasso.Picasso

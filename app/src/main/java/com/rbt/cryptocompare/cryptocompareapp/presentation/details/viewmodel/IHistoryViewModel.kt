@@ -1,9 +1,8 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel
+package com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel
 
 import androidx.lifecycle.LiveData
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinHistory
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
-import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinComparison
 
 interface IHistoryViewModel {
     val historyData: LiveData<CoinHistory>

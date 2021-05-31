@@ -1,6 +1,5 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel
+package com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

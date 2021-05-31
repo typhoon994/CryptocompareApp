@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.main
+package com.rbt.cryptocompare.cryptocompareapp.presentation.main
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.rbt.cryptocompare.cryptocompareapp.R
-import com.rbt.cryptocompare.cryptocompareapp.activity.details.DetailsActivity
+import com.rbt.cryptocompare.cryptocompareapp.presentation.details.DetailsActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
     private lateinit var viewModel: IMainViewModel
     private var loader: View? = null
 
-    private val observer: Observer<MainDataModel>
+    private val mainDataObserver: Observer<MainDataModel>
         get() = Observer { model ->
             viewAdapter = MainAdapter(model!!.list, this)
             recyclerView.adapter = viewAdapter
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.setDbInstance(db)
-        viewModel.getMainDataObservable().observe(this, observer)
+        viewModel.mainDataObservable.observe(this, mainDataObserver)
 
         loader!!.visibility = View.VISIBLE
         viewModel.onViewShown()

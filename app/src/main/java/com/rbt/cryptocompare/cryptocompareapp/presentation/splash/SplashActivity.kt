@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.splash
+package com.rbt.cryptocompare.cryptocompareapp.presentation.splash
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.rbt.cryptocompare.cryptocompareapp.R
-import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainActivity
+import com.rbt.cryptocompare.cryptocompareapp.presentation.main.MainActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 
 

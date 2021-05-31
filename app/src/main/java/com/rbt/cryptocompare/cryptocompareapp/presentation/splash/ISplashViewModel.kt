@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.splash
+package com.rbt.cryptocompare.cryptocompareapp.presentation.splash
 
 import androidx.lifecycle.LiveData
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase

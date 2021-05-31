@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.details
+package com.rbt.cryptocompare.cryptocompareapp.presentation.details
 
 import androidx.lifecycle.Observer
 import android.os.Bundle
@@ -12,14 +12,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinHistory
-import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.DetailsViewModel
-import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.IHistoryViewModel
+import com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel.DetailsViewModel
+import com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel.IHistoryViewModel
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 
 
 class HistoryFragment : DetailsFragment() {
-
     override fun getTabTitle() = "Coin History"
     private lateinit var viewModel: IHistoryViewModel
     private lateinit var coinItem: CoinItem

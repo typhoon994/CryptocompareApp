@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity
+package com.rbt.cryptocompare.cryptocompareapp.presentation
 
 import android.app.Application
 

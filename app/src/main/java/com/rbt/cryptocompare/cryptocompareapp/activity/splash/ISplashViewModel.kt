@@ -5,6 +5,8 @@ import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 
 interface ISplashViewModel {
 
-    fun cacheMainData() : LiveData<String?>
+    val dismissSplashObservable: LiveData<Void?>
+
+    fun onViewShown()
     fun setDBInstance(db: CoinDatabase)
 }

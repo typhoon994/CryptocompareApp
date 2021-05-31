@@ -8,16 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainDataModel
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 
 class DetailsActivity : AppCompatActivity() {
 
-    lateinit var coin: MainDataModel.CoinItem
+    lateinit var coin: CoinItem
 
     companion object {
 
         private val COIN_EXTRA = "coin_extra"
 
-        fun newIntent(context: Context, coin: MainDataModel.CoinItem): Intent {
+        fun newIntent(context: Context, coin: CoinItem): Intent {
             val intent = Intent(context, DetailsActivity::class.java)
             intent.putExtra(COIN_EXTRA, coin)
 

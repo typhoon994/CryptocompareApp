@@ -10,18 +10,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.rbt.cryptocompare.cryptocompareapp.R
-import com.rbt.cryptocompare.cryptocompareapp.activity.details.model.CoinComparison
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinComparison
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.DetailsViewModel
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.viewmodel.IMoreDetailsViewModel
-import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainDataModel
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 import com.squareup.picasso.Picasso
 
 class MoreDetailsFragment : DetailsFragment() {
 
     override fun getTabTitle() = "More details"
 
-    private lateinit var coinItem: MainDataModel.CoinItem
+    private lateinit var coinItem: CoinItem
     private lateinit var viewModel: IMoreDetailsViewModel
 
     private var coinComparison: TextView? = null
@@ -30,9 +30,9 @@ class MoreDetailsFragment : DetailsFragment() {
     private var loader: View? = null
 
     companion object {
-        protected val COIN_EXTRA = "coin_extra"
+        private const val COIN_EXTRA = "coin_extra"
 
-        fun newInstance(coinItem: MainDataModel.CoinItem): DetailsFragment {
+        fun newInstance(coinItem: CoinItem): DetailsFragment {
             val fragment = MoreDetailsFragment()
             val bundle = Bundle()
             bundle.putParcelable(COIN_EXTRA, coinItem)
@@ -42,7 +42,7 @@ class MoreDetailsFragment : DetailsFragment() {
         }
     }
 
-    private val observer: Observer<CoinComparison?>
+    private val comparisonDataObserver: Observer<CoinComparison?>
         get() = Observer { comparison: CoinComparison? ->
             comparison?.let {
                 coinComparison!!.text = it.toString()
@@ -98,7 +98,9 @@ class MoreDetailsFragment : DetailsFragment() {
 
         viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
         viewModel.setDBInstance(db)
-        viewModel.getComparisonResults(coinItem.Symbol).observe(viewLifecycleOwner, observer)
+
+        viewModel.comparisonDataObservable.observe(viewLifecycleOwner, comparisonDataObserver)
+        viewModel.onViewShown(coinItem.Symbol)
 
         comparisonLayout!!.visibility = View.GONE
         loader!!.visibility = View.VISIBLE

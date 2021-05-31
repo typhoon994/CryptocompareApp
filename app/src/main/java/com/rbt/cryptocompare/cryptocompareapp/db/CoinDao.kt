@@ -8,11 +8,15 @@ import androidx.room.Query
 
 @Dao
 interface CoinDao {
-    @Query("SELECT * FROM CoinDbModel") fun getAll(): Array<CoinDbModel>
+    @Query("SELECT * FROM CoinDbModel")
+    suspend fun getAll(): Array<CoinDbModel>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE) fun insertAll(coins: Array<CoinDbModel>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(coins: Array<CoinDbModel>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE) fun insertComparison(comparison: ComparisonDbModel)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertComparison(comparison: ComparisonDbModel)
 
-    @Query("SELECT * FROM ComparisonDbModel WHERE Symbol LIKE :symbol") fun getComparison(symbol: String) : ComparisonDbModel
+    @Query("SELECT * FROM ComparisonDbModel WHERE Symbol LIKE :symbol")
+    suspend fun getComparison(symbol: String): ComparisonDbModel
 }

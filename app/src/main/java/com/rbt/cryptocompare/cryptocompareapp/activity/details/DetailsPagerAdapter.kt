@@ -3,8 +3,9 @@ package com.rbt.cryptocompare.cryptocompareapp.activity.details
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainDataModel
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 
-class DetailsPagerAdapter(fm: FragmentManager, coin: MainDataModel.CoinItem) : FragmentPagerAdapter(fm)  {
+class DetailsPagerAdapter(fm: FragmentManager, coin: CoinItem) : FragmentPagerAdapter(fm)  {
 
         private val screens = arrayListOf(MoreDetailsFragment.newInstance(coin), HistoryFragment.newInstance(coin))
 

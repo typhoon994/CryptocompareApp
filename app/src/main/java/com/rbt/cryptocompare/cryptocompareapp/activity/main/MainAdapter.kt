@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.rbt.cryptocompare.cryptocompareapp.R
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 import com.squareup.picasso.Picasso
 
 class MainAdapter(
-    private val mainData: Array<MainDataModel.CoinItem>,
+    private val mainData: List<CoinItem>,
     private val listener: IOnCoinSelectedListener?
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     interface IOnCoinSelectedListener {
-        fun onCoinSelected(coin: MainDataModel.CoinItem)
+        fun onCoinSelected(coin: CoinItem)
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun render(model: MainDataModel.CoinItem, listener: IOnCoinSelectedListener?) {
+        fun render(model: CoinItem, listener: IOnCoinSelectedListener?) {
             itemView.findViewById<TextView>(R.id.name).text = model.Name
             itemView.findViewById<TextView>(R.id.symbol).text = model.Symbol
             Picasso.get().load(model.ImageUrl).into(itemView.findViewById<ImageView>(R.id.icon))

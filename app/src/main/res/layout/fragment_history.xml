@@ -33,13 +33,13 @@
         android:weightSum="2">
 
         <Spinner
-            android:id="@+id/interval_spinner"
+            android:id="@+id/spinner_rate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1" />
 
         <Spinner
-            android:id="@+id/rate_spinner"
+            android:id="@+id/spinner_interval"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1" />

@@ -11,6 +11,7 @@ import android.view.View
 import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.activity.details.DetailsActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 
 
 class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
@@ -54,10 +55,10 @@ class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
         viewModel.getMainDataObservable().observe(this, observer)
 
         loader!!.visibility = View.VISIBLE
-        viewModel.getMainData()
+        viewModel.onViewShown()
     }
 
-    override fun onCoinSelected(coin: MainDataModel.CoinItem) {
+    override fun onCoinSelected(coin: CoinItem) {
         val intent = DetailsActivity.newIntent(this, coin)
         startActivity(intent)
     }

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 
 interface IMainViewModel {
+    val mainDataObservable : LiveData<MainDataModel>
 
-    fun getMainDataObservable() : LiveData<MainDataModel>
-    fun getMainData()
+    fun onViewShown()
     fun setDbInstance(db: CoinDatabase)
 }

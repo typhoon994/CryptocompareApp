@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Toast
 import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.activity.main.MainActivity
 import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
@@ -16,19 +15,18 @@ import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 class SplashActivity : AppCompatActivity() {
 
     companion object {
-        private val SPLASH_TIME = 500L
+        private const val SPLASH_TIME = 500L
     }
 
     private lateinit var viewModel : ISplashViewModel
 
-    private val observer: Observer<String?>
-        get() = Observer { error: String? ->
-            error?.let { Toast.makeText(this, error, Toast.LENGTH_SHORT).show() }
+    private val dismissObserver: Observer<Void?>
+        get() = Observer {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-    private fun onSplashTimeExpired() = viewModel.cacheMainData().observe(this, observer)
+    private fun onSplashTimeExpired() = viewModel.onViewShown()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +38,7 @@ class SplashActivity : AppCompatActivity() {
                 .build()
 
         viewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
+        viewModel.dismissSplashObservable.observe(this, dismissObserver)
         viewModel.setDBInstance(db)
         Handler().postDelayed(this::onSplashTimeExpired, SPLASH_TIME)
     }

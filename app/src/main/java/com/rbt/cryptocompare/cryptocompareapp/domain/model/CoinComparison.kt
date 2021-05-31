@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.activity.details.model
+package com.rbt.cryptocompare.cryptocompareapp.domain.model
 
 import com.rbt.cryptocompare.cryptocompareapp.db.ComparisonDbModel
 import com.rbt.cryptocompare.cryptocompareapp.networking.model.ComparisonResponse
@@ -12,16 +12,6 @@ class CoinComparison(val BTC: String,
                      val EUR: String) {
 
     companion object {
-        fun getInstanceFromNetworkModel(model: ComparisonResponse) : CoinComparison {
-            return CoinComparison(model.BTC + " BTC",
-                    model.ETH + " ETH",
-                    model.EVN + " EVN",
-                    model.DOGE + " DOGE",
-                    model.ZEC + " ZEC",
-                    model.USD + " USD",
-                    model.EUR + " EUR")
-        }
-
         fun getInstanceFromDBModel(model: ComparisonDbModel) : CoinComparison {
             return CoinComparison(model.BTC + " BTC",
                     model.ETH + " ETH",

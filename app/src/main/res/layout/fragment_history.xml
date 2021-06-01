@@ -45,7 +45,7 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <com.rbt.cryptocompare.cryptocompareapp.presentation.details.HistoryGraphView
+    <com.typhoon.cryptocompare.cryptocompareapp.presentation.details.HistoryGraphView
         android:layout_width="match_parent"
         android:id="@+id/history_graph"
         android:layout_height="320dp"

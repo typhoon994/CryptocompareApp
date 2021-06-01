@@ -1,7 +1,6 @@
 package com.rbt.cryptocompare.cryptocompareapp.domain.model
 
-import com.rbt.cryptocompare.cryptocompareapp.db.ComparisonDbModel
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.ComparisonResponse
+import com.rbt.cryptocompare.cryptocompareapp.data.db.ComparisonDbModel
 
 class CoinComparison(val BTC: String,
                      val ETH: String,

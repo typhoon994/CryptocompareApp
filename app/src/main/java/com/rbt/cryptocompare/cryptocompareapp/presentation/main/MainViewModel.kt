@@ -3,7 +3,7 @@ package com.rbt.cryptocompare.cryptocompareapp.presentation.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
+import com.rbt.cryptocompare.cryptocompareapp.data.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.domain.usecase.CoinListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

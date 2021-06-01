@@ -1,6 +1,6 @@
 package com.rbt.cryptocompare.cryptocompareapp.domain.model
 
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.HistoryResponse
+import com.rbt.cryptocompare.cryptocompareapp.data.networking.model.HistoryResponse
 import java.util.*
 
 class CoinHistory(val historyItems: Array<HistoryItem>, val startTime: Date, val endTime: Date, val unit: String) {

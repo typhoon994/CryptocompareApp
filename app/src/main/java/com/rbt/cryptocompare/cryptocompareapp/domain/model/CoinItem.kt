@@ -1,7 +1,7 @@
 package com.rbt.cryptocompare.cryptocompareapp.domain.model
 
 import android.os.Parcelable
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDbModel
+import com.rbt.cryptocompare.cryptocompareapp.data.db.CoinDbModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

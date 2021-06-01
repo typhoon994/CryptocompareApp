@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.networking
+package com.rbt.cryptocompare.cryptocompareapp.data.networking
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

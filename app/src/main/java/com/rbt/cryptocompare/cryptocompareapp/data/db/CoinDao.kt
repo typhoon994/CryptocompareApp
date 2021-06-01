@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.db
+package com.rbt.cryptocompare.cryptocompareapp.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -9,10 +9,10 @@ import androidx.room.Query
 @Dao
 interface CoinDao {
     @Query("SELECT * FROM CoinDbModel")
-    suspend fun getAll(): Array<CoinDbModel>
+    suspend fun getAll(): List<CoinDbModel>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(coins: Array<CoinDbModel>)
+    suspend fun insertAll(coins: List<CoinDbModel>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertComparison(comparison: ComparisonDbModel)

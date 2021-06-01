@@ -1,30 +1,22 @@
 package com.rbt.cryptocompare.cryptocompareapp.domain.usecase
 
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
-import com.rbt.cryptocompare.cryptocompareapp.db.ComparisonDbModel
+import com.rbt.cryptocompare.cryptocompareapp.data.db.CoinDatabase
+import com.rbt.cryptocompare.cryptocompareapp.data.repository.ComparisonRepositoryImpl
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinComparison
-import com.rbt.cryptocompare.cryptocompareapp.domain.model.HistoryInterval
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinHistory
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.HistoryInterval
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.HistoryRate
-import com.rbt.cryptocompare.cryptocompareapp.networking.ICryptoApi
-import com.rbt.cryptocompare.cryptocompareapp.networking.NetworkingHelper
 
-class CoinComparisonUseCase(
-    private val networkingHelper: ICryptoApi = NetworkingHelper.getInstance(),
-    private val database: CoinDatabase?
-) {
+class CoinComparisonUseCase(private val database: CoinDatabase?) {
+    companion object {
+        private const val COMPARISON_CRITERIA = "BTC,ETH,EVN,DOGE,ZEC,USD,EUR"
+    }
+
     suspend fun getComparison(coinSymbol: String): CoinComparison? {
-        val response = networkingHelper.getComparison(coinSymbol).execute()
-        val responseBody = response.body()
-        return if (response.isSuccessful && responseBody != null) {
-            val dbModel =
-                ComparisonDbModel.getInstanceFromComparisonResponse(coinSymbol, responseBody)
-            database?.coinDao()?.insertComparison(dbModel)
-            CoinComparison.getInstanceFromDBModel(dbModel)
-        } else {
-            val model = database?.coinDao()?.getComparison(coinSymbol)
-            model?.let { CoinComparison.getInstanceFromDBModel(model) }
-        }
+        return ComparisonRepositoryImpl(database = database).compareSymbol(
+            coinSymbol,
+            COMPARISON_CRITERIA
+        )
     }
 
     suspend fun getComparisonForInterval(
@@ -34,24 +26,11 @@ class CoinComparisonUseCase(
     ): CoinHistory? {
         val numberOfItems = interval.timeInMinutes / rate.timeInMinutes
         val compareSymbol = if (coinSymbol == "BTC") "EUR" else "BTC"
-
-        val response = when (rate) {
-            HistoryRate.Hour -> networkingHelper.getHourHistory(
-                coinSymbol,
-                compareSymbol,
-                numberOfItems
-            ).execute()
-            HistoryRate.Minute -> networkingHelper.getMinuteHistory(
-                coinSymbol,
-                compareSymbol,
-                numberOfItems
-            ).execute()
-            else -> networkingHelper.getDayHistory(coinSymbol, compareSymbol, numberOfItems)
-                .execute()
-        }
-
-        return if (response.isSuccessful) response.body()?.let {
-            CoinHistory.getInstanceFromNetworkModel(it, compareSymbol)
-        } else null
+        return ComparisonRepositoryImpl(database = database).getCoinHistory(
+            coinSymbol,
+            compareSymbol,
+            numberOfItems,
+            rate
+        )
     }
 }

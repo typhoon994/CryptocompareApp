@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.networking.model
+package com.rbt.cryptocompare.cryptocompareapp.data.networking.model
 
 class CoinsResponse(val BaseImageUrl: String, val Data: Map<String, CoinData>) {
 

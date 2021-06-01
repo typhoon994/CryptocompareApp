@@ -1,11 +1,10 @@
-package com.rbt.cryptocompare.cryptocompareapp.networking
+package com.rbt.cryptocompare.cryptocompareapp.data.networking
 
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.CoinsResponse
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.ComparisonResponse
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.HistoryResponse
+import com.rbt.cryptocompare.cryptocompareapp.data.networking.model.CoinsResponse
+import com.rbt.cryptocompare.cryptocompareapp.data.networking.model.ComparisonResponse
+import com.rbt.cryptocompare.cryptocompareapp.data.networking.model.HistoryResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ICryptoApi {
@@ -15,7 +14,7 @@ interface ICryptoApi {
 
     @GET("price")
     fun getComparison(@Query("fsym") symbol: String,
-                      @Query("tsyms") comparison: String = "BTC,ETH,EVN,DOGE,ZEC,USD,EUR")
+                      @Query("tsyms") comparison: String)
             : Call<ComparisonResponse>
 
     @GET("histohour")

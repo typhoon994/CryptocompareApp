@@ -1,4 +1,4 @@
-package com.rbt.cryptocompare.cryptocompareapp.networking.model
+package com.rbt.cryptocompare.cryptocompareapp.data.networking.model
 
 class ComparisonResponse(val BTC: String,
                          val ETH: String,

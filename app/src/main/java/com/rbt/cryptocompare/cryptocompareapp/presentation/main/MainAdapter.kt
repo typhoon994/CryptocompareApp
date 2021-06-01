@@ -1,11 +1,11 @@
 package com.rbt.cryptocompare.cryptocompareapp.presentation.main
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.rbt.cryptocompare.cryptocompareapp.R
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 import com.squareup.picasso.Picasso

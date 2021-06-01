@@ -1,21 +1,21 @@
 package com.rbt.cryptocompare.cryptocompareapp.presentation.details
 
-import androidx.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rbt.cryptocompare.cryptocompareapp.R
-import androidx.lifecycle.ViewModelProviders
-import androidx.room.Room
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.room.Room
+import com.rbt.cryptocompare.cryptocompareapp.R
+import com.rbt.cryptocompare.cryptocompareapp.data.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinHistory
+import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 import com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel.DetailsViewModel
 import com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel.IHistoryViewModel
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
-import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinItem
 
 
 class HistoryFragment : DetailsFragment() {

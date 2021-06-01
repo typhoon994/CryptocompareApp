@@ -1,15 +1,15 @@
 package com.rbt.cryptocompare.cryptocompareapp.presentation.splash
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.room.Room
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.room.Room
 import com.rbt.cryptocompare.cryptocompareapp.R
+import com.rbt.cryptocompare.cryptocompareapp.data.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.presentation.main.MainActivity
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 
 
 class SplashActivity : AppCompatActivity() {

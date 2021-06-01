@@ -1,9 +1,9 @@
-package com.rbt.cryptocompare.cryptocompareapp.db
+package com.rbt.cryptocompare.cryptocompareapp.data.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.CoinsResponse
+import com.rbt.cryptocompare.cryptocompareapp.data.networking.model.CoinsResponse
 
 @Entity
 class CoinDbModel(@PrimaryKey val Id: Long,

@@ -1,8 +1,8 @@
-package com.rbt.cryptocompare.cryptocompareapp.db
+package com.rbt.cryptocompare.cryptocompareapp.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rbt.cryptocompare.cryptocompareapp.networking.model.ComparisonResponse
+import com.rbt.cryptocompare.cryptocompareapp.data.networking.model.ComparisonResponse
 import org.jetbrains.annotations.NotNull
 
 @Entity

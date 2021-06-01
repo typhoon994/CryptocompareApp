@@ -3,9 +3,9 @@ package com.rbt.cryptocompare.cryptocompareapp.presentation.details.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rbt.cryptocompare.cryptocompareapp.data.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinComparison
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.CoinHistory
-import com.rbt.cryptocompare.cryptocompareapp.db.CoinDatabase
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.HistoryInterval
 import com.rbt.cryptocompare.cryptocompareapp.domain.model.HistoryRate
 import com.rbt.cryptocompare.cryptocompareapp.domain.usecase.CoinComparisonUseCase

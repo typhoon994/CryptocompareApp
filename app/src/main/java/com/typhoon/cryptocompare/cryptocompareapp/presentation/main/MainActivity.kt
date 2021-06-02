@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.typhoon.cryptocompare.cryptocompareapp.R
 import com.typhoon.cryptocompare.cryptocompareapp.domain.model.CoinItem
 import com.typhoon.cryptocompare.cryptocompareapp.presentation.details.DetailsActivity
+import com.typhoon.cryptocompare.cryptocompareapp.presentation.navigationdetails.NavigationDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -51,7 +52,8 @@ class MainActivity : AppCompatActivity(), MainAdapter.IOnCoinSelectedListener {
     }
 
     override fun onCoinSelected(coin: CoinItem) {
-        val intent = DetailsActivity.newIntent(this, coin)
-        startActivity(intent)
+//        val intent = DetailsActivity.newIntent(this, coin)
+//        startActivity(intent)
+        startActivity(NavigationDetailsActivity.newIntent(this, coin))
     }
 }

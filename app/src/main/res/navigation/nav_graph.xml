@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/moreDetailsFragment">
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.typhoon.cryptocompare.cryptocompareapp.presentation.details.HistoryFragment"
+        android:label="HistoryFragment" >
+        <argument
+            android:name="coin_extra"
+            app:argType="com.typhoon.cryptocompare.cryptocompareapp.domain.model.CoinItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreDetailsFragment"
+        android:name="com.typhoon.cryptocompare.cryptocompareapp.presentation.details.MoreDetailsFragment"
+        android:label="MoreDetailsFragment" >
+        <action
+            android:id="@+id/showHistory"
+            app:destination="@id/historyFragment" />
+        <argument
+            android:name="coin_extra"
+            app:argType="com.typhoon.cryptocompare.cryptocompareapp.domain.model.CoinItem" />
+        <argument
+            android:name="show_next"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+</navigation>

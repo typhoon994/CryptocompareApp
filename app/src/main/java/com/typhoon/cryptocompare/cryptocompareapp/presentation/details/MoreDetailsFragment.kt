@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import com.typhoon.cryptocompare.cryptocompareapp.R
 import com.typhoon.cryptocompare.cryptocompareapp.domain.model.CoinComparison
@@ -29,6 +32,8 @@ class MoreDetailsFragment : DetailsFragment() {
 
     companion object {
         private const val COIN_EXTRA = "coin_extra"
+        private const val SHOW_NEXT = "show_next"
+
         fun newInstance(coinItem: CoinItem): DetailsFragment {
             val fragment = MoreDetailsFragment()
             val bundle = Bundle()
@@ -59,6 +64,7 @@ class MoreDetailsFragment : DetailsFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_more_details, container, false)
         coinItem = arguments?.getParcelable(COIN_EXTRA) ?: error("Coin extra is missing")
+        val historyButtonVisible = arguments?.getBoolean(SHOW_NEXT) ?: false
 
         Picasso.get().load(coinItem.ImageUrl).into(view.findViewById<ImageView>(R.id.icon))
         view.findViewById<TextView>(R.id.full_name)?.text = coinItem.FullName
@@ -80,6 +86,9 @@ class MoreDetailsFragment : DetailsFragment() {
         comparisonLayout = view.findViewById(R.id.comparison_layout)
         loader = view.findViewById(R.id.loader)
         coinSymbol = view.findViewById(R.id.coin_symbol)
+        val historyButton = view.findViewById<Button>(R.id.show_history)
+        historyButton.isVisible = historyButtonVisible
+        historyButton.setOnClickListener { onHistoryButtonClick() }
 
         return view
     }
@@ -94,5 +103,10 @@ class MoreDetailsFragment : DetailsFragment() {
 
         comparisonLayout!!.visibility = View.GONE
         loader!!.visibility = View.VISIBLE
+    }
+
+    private fun onHistoryButtonClick() {
+        val action = MoreDetailsFragmentDirections.showHistory(coinItem)
+        findNavController().navigate(action)
     }
 }

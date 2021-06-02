@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.typhoon.cryptocompare.cryptocompareapp.presentation.details.DetailsActivity"></activity>
+        <activity android:name="com.typhoon.cryptocompare.cryptocompareapp.presentation.details.DetailsActivity"/>
+        <activity android:name="com.typhoon.cryptocompare.cryptocompareapp.presentation.navigationdetails.NavigationDetailsActivity"/>
     </application>
 
 </manifest>

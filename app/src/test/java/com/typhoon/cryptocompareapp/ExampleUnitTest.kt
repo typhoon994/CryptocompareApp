@@ -8,4 +8,9 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun `Test failure`() {
+        assertEquals("Wow! Can't be true!", 3, 1 + 1)
+    }
 }
